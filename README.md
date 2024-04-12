@@ -55,3 +55,69 @@ Citations:
 [6] https://cloud.tencent.com/developer/article/1782220
 [7] https://developer.aliyun.com/article/1148500
 [8] https://blog.51cto.com/u_16213383/8456894
+
+
+要在Python中快速开始使用MySQL，你可以遵循以下步骤来设置环境并执行基本的数据库操作。这个例子将涵盖安装必要的MySQL驱动程序、连接到MySQL数据库、以及执行一个简单的查询。
+
+### 步骤1: 安装MySQL驱动程序
+
+首先，你需要确保你的Python环境中安装了MySQL驱动程序。本例中，我们将使用"MySQL Connector"，这是一个官方支持的驱动程序，可以通过PIP安装。打开你的命令行工具，执行以下命令来安装它：
+
+```bash
+python -m pip install mysql-connector-python
+```
+
+这将下载并安装MySQL Connector[1]。
+
+### 步骤2: 创建数据库连接
+
+安装完MySQL驱动程序后，你需要创建一个Python脚本来连接到你的MySQL数据库。首先，确保你已经有一个运行中的MySQL数据库实例，并且知道其主机地址、用户名和密码。
+
+接下来，创建一个名为`demo_mysql_connection.py`的Python文件，并添加以下代码：
+
+```python
+import mysql.connector
+
+mydb = mysql.connector.connect(
+  host="localhost",  # 数据库主机地址
+  user="yourusername",  # 数据库用户名
+  password="yourpassword"  # 数据库密码
+)
+
+print(mydb)
+```
+
+这段代码尝试连接到你的MySQL数据库，并在成功连接时打印出数据库连接对象[1]。
+
+### 步骤3: 执行一个简单的查询
+
+连接到数据库后，你可以开始执行SQL查询。在同一个`demo_mysql_connection.py`文件中，继续添加以下代码来执行一个简单的查询，例如获取数据库的版本：
+
+```python
+cursor = mydb.cursor()
+
+cursor.execute("SELECT VERSION()")
+
+version = cursor.fetchone()
+
+print("Database version:", version)
+
+cursor.close()
+```
+
+这段代码创建了一个游标对象，用于执行查询。`SELECT VERSION()`查询返回数据库的版本号，然后我们通过`fetchone()`方法获取查询结果并打印出来[1]。
+
+### 总结
+
+通过以上步骤，你已经成功地在Python中安装了MySQL驱动程序，连接到了MySQL数据库，并执行了一个简单的查询来获取数据库的版本。这是一个快速开始使用MySQL的基本例子，你可以在此基础上继续探索更多的数据库操作，如插入、更新和删除数据。
+
+Citations:
+[1] https://www.w3schools.com/python/python_mysql_getstarted.asp
+[2] https://www.datacamp.com/tutorial/mysql-python
+[3] https://planetscale.com/blog/connect-to-a-mysql-database-in-python
+[4] https://learn.microsoft.com/en-us/azure/mysql/single-server/connect-python
+[5] https://dev.mysql.com/doc/dev/connector-python/latest/tutorials/getting_started.html
+[6] https://dev.mysql.com/doc/refman/8.3/en/mysql-shell-tutorial-python.html
+[7] https://www.youtube.com/watch?v=x7SwgcpACng
+[8] https://docs.pingcap.com/zh/tidb/stable/dev-guide-sample-application-python-mysql-connector/
+
